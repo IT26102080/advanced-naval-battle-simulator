@@ -1,0 +1,169 @@
+=== PART 1-B SIMULATION 1 ===
+
+Number of Path Points = 5
+
+=== Path Point 1 ===
+Battleship Position = (516, 623)
+Escort Ship E1
+Position = (897, 802)
+Distance from B = 420.95
+B Can Hit = NO
+E Can Hit B = NO
+
+Escort Ship E2
+Position = (220, 380)
+Distance from B = 382.97
+B Can Hit = NO
+E Can Hit B = NO
+
+Escort Ship E3
+Position = (104, 641)
+Distance from B = 412.39
+B Can Hit = NO
+E Can Hit B = NO
+
+Escort Ship E4
+Position = (387, 583)
+Distance from B = 135.06
+B Can Hit = YES
+E Can Hit B = NO
+
+Result = DESTROYED BY B
+Time to Hit = 3.82 seconds
+
+Escort Ship E5
+Position = (653, 369)
+Distance from B = 288.59
+B Can Hit = NO
+E Can Hit B = NO
+
+Battleship SURVIVED this point
+Number of Escort Ships hit by B = 1
+
+Battle Time at this Point = 3.82 seconds
+
+=== Path Point 2 ===
+Battleship Position = (703, 971)
+Escort Ship E1
+Position = (897, 802)
+Distance from B = 257.29
+B Can Hit = NO
+E Can Hit B = NO
+
+Escort Ship E2
+Position = (220, 380)
+Distance from B = 763.26
+B Can Hit = NO
+E Can Hit B = NO
+
+Escort Ship E3
+Position = (104, 641)
+Distance from B = 683.89
+B Can Hit = NO
+E Can Hit B = NO
+
+Escort Ship E5
+Position = (653, 369)
+Distance from B = 604.07
+B Can Hit = NO
+E Can Hit B = NO
+
+Battleship SURVIVED this point
+Number of Escort Ships hit by B = 0
+
+Battle Time at this Point = 0.00 seconds
+
+=== Path Point 3 ===
+Battleship Position = (304, 394)
+Escort Ship E1
+Position = (897, 802)
+Distance from B = 719.80
+B Can Hit = NO
+E Can Hit B = NO
+
+Escort Ship E2
+Position = (220, 380)
+Distance from B = 85.16
+B Can Hit = YES
+E Can Hit B = NO
+
+Result = DESTROYED BY B
+Time to Hit = 2.21 seconds
+
+Escort Ship E3
+Position = (104, 641)
+Distance from B = 317.82
+B Can Hit = NO
+E Can Hit B = NO
+
+Escort Ship E5
+Position = (653, 369)
+Distance from B = 349.89
+B Can Hit = NO
+E Can Hit B = NO
+
+Battleship SURVIVED this point
+Number of Escort Ships hit by B = 1
+
+Battle Time at this Point = 2.21 seconds
+
+=== Path Point 4 ===
+Battleship Position = (491, 525)
+Escort Ship E1
+Position = (897, 802)
+Distance from B = 491.49
+B Can Hit = NO
+E Can Hit B = NO
+
+Escort Ship E3
+Position = (104, 641)
+Distance from B = 404.01
+B Can Hit = NO
+E Can Hit B = NO
+
+Escort Ship E5
+Position = (653, 369)
+Distance from B = 224.90
+B Can Hit = NO
+E Can Hit B = NO
+
+Battleship SURVIVED this point
+Number of Escort Ships hit by B = 0
+
+Battle Time at this Point = 0.00 seconds
+
+=== Path Point 5 ===
+Battleship Position = (464, 219)
+Escort Ship E1
+Position = (897, 802)
+Distance from B = 726.21
+B Can Hit = NO
+E Can Hit B = NO
+
+Escort Ship E3
+Position = (104, 641)
+Distance from B = 554.69
+B Can Hit = NO
+E Can Hit B = NO
+
+Escort Ship E5
+Position = (653, 369)
+Distance from B = 241.29
+B Can Hit = NO
+E Can Hit B = NO
+
+Battleship SURVIVED this point
+Number of Escort Ships hit by B = 0
+
+Battle Time at this Point = 0.00 seconds
+
+
+=== FINAL SIMULATION 1 STATUS ===
+Battleship Status = SURVIVED
+
+Escort Ships Final Status:
+Escort Ship E1 = ALIVE
+Escort Ship E2 = DESTROYED
+Escort Ship E3 = ALIVE
+Escort Ship E4 = DESTROYED
+Escort Ship E5 = ALIVE

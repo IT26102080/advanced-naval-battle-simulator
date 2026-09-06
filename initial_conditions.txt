@@ -1,0 +1,60 @@
+=== INITIAL BATTLEFIELD CONDITIONS ===
+
+Battleship
+Type = M
+Position = (23, 32)
+Max Velocity = 40.00
+Max Attack Range = 163.10
+
+Escort Ships
+
+Escort Ship E1
+Position = (897, 802)
+Type = EC
+Angle Range = 25.0
+Min Angle = 25.0
+Max Angle = 50.0
+Min Velocity = 4.0
+Max Velocity = 33.0
+Impact Power = 0.07
+
+Escort Ship E2
+Position = (220, 380)
+Type = EE
+Angle Range = 70.0
+Min Angle = 1.0
+Max Angle = 71.0
+Min Velocity = 1.0
+Max Velocity = 2.0
+Impact Power = 0.04
+
+Escort Ship E3
+Position = (104, 641)
+Type = ED
+Angle Range = 50.0
+Min Angle = 40.0
+Max Angle = 90.0
+Min Velocity = 6.0
+Max Velocity = 20.0
+Impact Power = 0.05
+
+Escort Ship E4
+Position = (387, 583)
+Type = EB
+Angle Range = 30.0
+Min Angle = 34.0
+Max Angle = 64.0
+Min Velocity = 2.0
+Max Velocity = 7.0
+Impact Power = 0.06
+
+Escort Ship E5
+Position = (653, 369)
+Type = EC
+Angle Range = 25.0
+Min Angle = 27.0
+Max Angle = 52.0
+Min Velocity = 10.0
+Max Velocity = 27.0
+Impact Power = 0.07
+

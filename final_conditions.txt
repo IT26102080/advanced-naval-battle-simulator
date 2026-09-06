@@ -1,0 +1,19 @@
+=== FINAL BATTLE CONDITIONS ===
+
+Battleship SURVIVED!
+Number of Escort Ships hit by B = 0
+Total Battle Time = 0.00 seconds
+
+Hit Escort Ship Details: 
+  None !
+  None !
+  None !
+  None !
+  None !
+
+=== FINAL ESCORT SHIP STATUS ===
+Escort Ship E1: NOT DESTROYED
+Escort Ship E2: NOT DESTROYED
+Escort Ship E3: NOT DESTROYED
+Escort Ship E4: NOT DESTROYED
+Escort Ship E5: NOT DESTROYED
