@@ -5,6 +5,7 @@ typedef struct {
     char type;
     int x, y;
     float maxVelocity;
+    float maxAttackRange;
 } BattleShip;
 
 // Structure for Escort Ship
@@ -20,13 +21,33 @@ typedef struct {
 } EscortShip;
 
 int main() {
-
+float CalculateBattleshipMaxRange(float maxVelocity);
     // Display program title
     printf(" ADVANCED NAVAL BATTLE SIMULATOR \n");
 
     int d;
-    int n;
+    int n, choice;
 
+ while (1) {   // Keep showing the menu until the user exits
+
+    printf("\n");   
+    printf("\n");  
+
+    // Display the main title
+    printf(" A D V A N C E D   N A V A L   B A T T L E\n");
+    printf("          S I M U L A T O R\n");
+
+    // Display menu options
+    printf("1. Start Simulation\n");
+    printf("2. View Instructions\n");
+    printf("3. Simulation Statistics\n");
+    printf("4. Set Random Seed\n");
+    printf("5. Exit\n");
+
+    // Ask the user to select an option
+    printf("Enter choice: ");
+    scanf("%d", &choice);   // Read the choice
+}
     // Create Battleship variable
     BattleShip B;
 
@@ -57,6 +78,9 @@ int main() {
     printf("Enter battleship maximum shell velocity: ");
     scanf("%f", &B.maxVelocity);
 
+    B.maxAttackRange = CalculateBattleshipMaxRange(B.maxVelocity);
+
+
     // Display battlefield details
     printf("battlefield size is %d x %d\n", d, d);
     printf("Number of escort ships: %d\n", n);
@@ -66,6 +90,9 @@ int main() {
     printf("Type: %c\n", B.type);
     printf("Position: (%d,%d)\n", B.x, B.y);
     printf("Maximum Shell Velocity: %.2f m/s\n", B.maxVelocity);
+    printf("Battleship Maximum Attack Range = %.2f\n", B.maxAttackRange);
 
-    return 0;
+
+        printf("\n--- Escortship Details ---\n");
+return 0;
 }
