@@ -8,6 +8,7 @@ int main(void)
 {
     int d;
     int n;
+    int k;
 
     BattleShip battleship;
 
@@ -24,6 +25,9 @@ int main(void)
 
     printf("Enter number of escort ships: ");
     scanf("%d", &n);
+
+    printf("Enter number of battleship path positions: ");
+    scanf("%d", &k);
 
     if (n > MAX_ESCORTS)
     {
