@@ -66,5 +66,16 @@ simulatePart1A(
     n
 );
 
+for (int i = 0; i < k; i++)
+{
+    printf("\n--- Part 1-B Position %d ---\n", i + 1);
+
+    generateBattleShipPosition(&battleship, d);
+
+    printf("Battleship Position: (%d, %d)\n",
+           battleship.x,
+           battleship.y);
+}
+
     return 0;
 }
