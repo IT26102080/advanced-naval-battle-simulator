@@ -596,6 +596,17 @@ void simulatePart1B(
     int k
 )
 {
+
+
+FILE *part1BFile = fopen("part1b_simulation1.txt", "w");
+
+if (part1BFile == NULL)
+{
+    printf("Error opening Part 1-B output file.\n");
+    return;
+}
+
+
     printf("\n===== PART 1-B SIMULATION 1 =====\n");
 
     for (int i = 0; i < k; i++)
@@ -608,6 +619,11 @@ void simulatePart1B(
                B->x,
                B->y);
 
+fprintf(part1BFile,
+        "Position %d - Battleship Position: (%d, %d)\n",
+        i + 1, B->x, B->y);
+
         simulatePart1A(B, escorts, n);
     }
+fclose(part1BFile);
 }
