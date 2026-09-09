@@ -1,0 +1,4 @@
+Escort Index: 1
+Type: EB
+Time to Hit: 0.47 seconds
+
