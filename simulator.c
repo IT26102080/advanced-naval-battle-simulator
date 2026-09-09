@@ -624,6 +624,22 @@ fprintf(part1BFile,
         i + 1, B->x, B->y);
 
         simulatePart1A(B, escorts, n);
+
+int destroyedCount = 0;
+
+for (int j = 0; j < n; j++)
+{
+    if (escorts[j].destroyed)
+    {
+        destroyedCount++;
     }
+}
+
+fprintf(part1BFile,
+        "Total Escort Ships Destroyed: %d\n\n",
+        destroyedCount);    
+
+
+}
 fclose(part1BFile);
 }

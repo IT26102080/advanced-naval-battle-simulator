@@ -1,3 +1,9 @@
-Position 1 - Battleship Position: (34, 98)
-Position 2 - Battleship Position: (34, 15)
-Position 3 - Battleship Position: (46, 10)
+Position 1 - Battleship Position: (50, 53)
+Total Escort Ships Destroyed: 0
+
+Position 2 - Battleship Position: (14, 61)
+Total Escort Ships Destroyed: 0
+
+Position 3 - Battleship Position: (73, 33)
+Total Escort Ships Destroyed: 0
+
