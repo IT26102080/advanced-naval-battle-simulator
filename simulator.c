@@ -446,6 +446,10 @@ void simulatePart1A(
 
     for (int i = 0; i < n; i++)
     {
+if (escorts[i].destroyed)
+{
+    continue;
+}
         if (canEscortHitBattleship(escorts[i], *B))
         {
             battleshipDestroyed = 1;
@@ -469,6 +473,11 @@ void simulatePart1A(
 
         for (int i = 0; i < n; i++)
         {
+    if (escorts[i].destroyed)
+    {
+        continue;
+    }
+
             if (canBattleshipHit(*B, escorts[i]))
             {
                 escorts[i].destroyed = 1;
@@ -574,4 +583,31 @@ void generateBattleShipPosition(BattleShip *B, int d)
 {
     B->x = generateRandomCoordinate(d);
     B->y = generateRandomCoordinate(d);
+}
+
+
+
+
+void simulatePart1B(
+    BattleShip *B,
+    EscortShip escorts[],
+    int n,
+    int d,
+    int k
+)
+{
+    printf("\n===== PART 1-B SIMULATION 1 =====\n");
+
+    for (int i = 0; i < k; i++)
+    {
+        printf("\n--- Position %d ---\n", i + 1);
+
+        generateBattleShipPosition(B, d);
+
+        printf("Battleship Position: (%d, %d)\n",
+               B->x,
+               B->y);
+
+        simulatePart1A(B, escorts, n);
+    }
 }
