@@ -159,4 +159,57 @@ void simulatePart2AC(
     float firingDelay
 );
 
+float getEscortFiringInterval(char type);
+
+void simulatePart2B(
+    BattleShip *B,
+    EscortShip escorts[],
+    int n,
+    float firingDelay
+);
+
+void simulatePart2BPath(
+    BattleShip *B,
+    EscortShip escorts[],
+    int n,
+    int d,
+    int k,
+    float firingDelay
+);
+
+float calculateDegradedImpact(
+    float initialImpact,
+    float gamma,
+    int shotNumber
+);
+
+void simulatePart2C(
+    BattleShip *B,
+    EscortShip escorts[],
+    int n,
+    float firingDelay
+);
+
+void simulatePart2AJam(
+    BattleShip *B,
+    EscortShip escorts[],
+    int n,
+    int d,
+    int k,
+    int t,
+    float thetaMin,
+    float firingDelay
+);
+
+void simulatePart2BJam(
+    BattleShip *B,
+    EscortShip escorts[],
+    int n,
+    int d,
+    int k,
+    int t,
+    float thetaMin,
+    float firingDelay
+);
+
 #endif
