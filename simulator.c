@@ -610,7 +610,7 @@ if (part1BFile == NULL)
     printf("\n===== PART 1-B SIMULATION 1 =====\n");
 
     for (int i = 0; i < k; i++)
-    {
+{
         printf("\n--- Position %d ---\n", i + 1);
 
         generateBattleShipPosition(B, d);
