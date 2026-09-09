@@ -11,14 +11,16 @@ int main(void)
     int k;
     int t;
     float thetaMin;
-
+    float firingDelay;
 
     BattleShip battleship;
 
     EscortShip escorts[MAX_ESCORTS];
     EscortShip escortsPart1C[MAX_ESCORTS];
     EscortShip escortsSimulation2[MAX_ESCORTS];
-
+    EscortShip escortsPart2A[MAX_ESCORTS];
+    EscortShip escortsInitial[MAX_ESCORTS];
+    EscortShip escortsPart2AC[MAX_ESCORTS];
 
     srand(time(NULL));
 
@@ -40,6 +42,9 @@ scanf("%d", &t);
 
 printf("Enter minimum vertical angle after gun jam: ");
 scanf("%f", &thetaMin);
+
+printf("Enter Battleship gun firing delay (seconds): ");
+scanf("%f", &firingDelay);
 
 if (t <= 0 || t >= k)
 {
@@ -70,6 +75,12 @@ if (thetaMin <= 0 || thetaMin >= 30)
         d,
         battleship.maxVelocity
     );
+
+/* Keep original escort conditions */
+for (int i = 0; i < n; i++)
+{
+    escortsInitial[i] = escorts[i];
+}
 
     displayBattlefield(
         battleship,
@@ -136,6 +147,49 @@ simulatePart1CPath(
     n,
     d,
     k
+);
+
+/* Fresh copy for Part 2-A */
+for (int i = 0; i < n; i++)
+{
+    escortsPart2A[i] = escortsInitial[i];
+}
+
+/* Part 2-A single position simulation */
+simulatePart2A(
+    &battleship,
+    escortsPart2A,
+    n,
+    firingDelay
+);
+
+/* Reset escorts before Part 2-A path simulation */
+for (int i = 0; i < n; i++)
+{
+    escortsPart2A[i] = escortsInitial[i];
+}
+
+/* Part 2-A path simulation */
+simulatePart2APath(
+    &battleship,
+    escortsPart2A,
+    n,
+    d,
+    k,
+    firingDelay
+);
+
+/* Fresh escort copy for Part 2-A / Part 1-C */
+for (int i = 0; i < n; i++)
+{
+    escortsPart2AC[i] = escortsInitial[i];
+}
+
+simulatePart2AC(
+    &battleship,
+    escortsPart2AC,
+    n,
+    firingDelay
 );
 
     return 0;

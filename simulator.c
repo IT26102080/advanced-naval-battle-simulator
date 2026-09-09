@@ -1015,3 +1015,357 @@ void simulatePart1CPath(
 
     printf("Part 1-C path results saved to part1c_path_results.txt\n");
 }
+
+
+void simulatePart2A(
+    BattleShip *B,
+    EscortShip escorts[],
+    int n,
+    float firingDelay
+)
+{
+    printf("\n===== PART 2-A SIMULATION =====\n");
+
+    FILE *file = fopen("part2a_results.txt", "w");
+
+    if (file == NULL)
+    {
+        printf("Error opening Part 2-A output file.\n");
+        return;
+    }
+
+    int order[n];
+    int count = 0;
+
+    /* Find escort ships inside Battleship attack range */
+    for (int i = 0; i < n; i++)
+    {
+        if (!escorts[i].destroyed &&
+            canBattleshipHit(*B, escorts[i]))
+        {
+            order[count] = i;
+            count++;
+        }
+    }
+
+    /* Sort by impact power - highest threat first */
+    for (int i = 0; i < count - 1; i++)
+    {
+        for (int j = i + 1; j < count; j++)
+        {
+            if (escorts[order[j]].impactPower >
+                escorts[order[i]].impactPower)
+            {
+                int temp = order[i];
+                order[i] = order[j];
+                order[j] = temp;
+            }
+        }
+    }
+
+    float totalTime = 0.0;
+
+    fprintf(file,
+            "Battleship Firing Delay: %.2f seconds\n",
+            firingDelay);
+
+    fprintf(file, "Attack Order:\n");
+
+    printf("Attack Order:\n");
+
+    for (int i = 0; i < count; i++)
+    {
+        int index = order[i];
+
+        printf("%d. Escort Ship %d\n",
+               i + 1,
+               escorts[index].index);
+
+        fprintf(file,
+                "%d. Escort Ship %d - Time: %.2f seconds\n",
+                i + 1,
+                escorts[index].index,
+                totalTime);
+
+        escorts[index].destroyed = 1;
+
+        /*
+         * Delay is between consecutive firings,
+         * so no extra delay is added after the last shot.
+         */
+        if (i < count - 1)
+        {
+            totalTime += firingDelay;
+        }
+    }
+
+    printf("Total Escort Ships Destroyed: %d\n", count);
+    printf("Total Battle Time: %.2f seconds\n", totalTime);
+
+    fprintf(file,
+            "Total Escort Ships Destroyed: %d\n",
+            count);
+
+    fprintf(file,
+            "Total Battle Time: %.2f seconds\n",
+            totalTime);
+
+    fclose(file);
+
+    printf("Part 2-A results saved to part2a_results.txt\n");
+}
+
+
+void simulatePart2APath(
+    BattleShip *B,
+    EscortShip escorts[],
+    int n,
+    int d,
+    int k,
+    float firingDelay
+)
+{
+    FILE *file = fopen("part2a_path_results.txt", "w");
+
+    if (file == NULL)
+    {
+        printf("Error opening Part 2-A path output file.\n");
+        return;
+    }
+
+    printf("\n===== PART 2-A PATH SIMULATION =====\n");
+
+    for (int p = 0; p < k; p++)
+    {
+        printf("\n--- Position %d ---\n", p + 1);
+
+        generateBattleShipPosition(B, d);
+
+        printf("Battleship Position: (%d, %d)\n",
+               B->x, B->y);
+
+        fprintf(file,
+                "\nPosition %d - Battleship Position: (%d, %d)\n",
+                p + 1, B->x, B->y);
+
+        int order[n];
+        int count = 0;
+
+        /* Find active escort ships inside B attack range */
+        for (int i = 0; i < n; i++)
+        {
+            if (!escorts[i].destroyed &&
+                canBattleshipHit(*B, escorts[i]))
+            {
+                order[count] = i;
+                count++;
+            }
+        }
+
+        /* Highest impact power = highest priority */
+        for (int i = 0; i < count - 1; i++)
+        {
+            for (int j = i + 1; j < count; j++)
+            {
+                if (escorts[order[j]].impactPower >
+                    escorts[order[i]].impactPower)
+                {
+                    int temp = order[i];
+                    order[i] = order[j];
+                    order[j] = temp;
+                }
+            }
+        }
+
+        printf("Attack Order:\n");
+        fprintf(file, "Attack Order:\n");
+
+        float firingTime = 0.0;
+
+        for (int i = 0; i < count; i++)
+        {
+            int e = order[i];
+
+            printf("%d. Escort Ship %d - Time %.2f s\n",
+                   i + 1,
+                   escorts[e].index,
+                   firingTime);
+
+            fprintf(file,
+                    "%d. Escort Ship %d - Time %.2f s\n",
+                    i + 1,
+                    escorts[e].index,
+                    firingTime);
+
+            escorts[e].destroyed = 1;
+
+            if (i < count - 1)
+            {
+                firingTime += firingDelay;
+            }
+        }
+
+        fprintf(file,
+                "Escort Ships Destroyed at this Position: %d\n",
+                count);
+
+        fprintf(file,
+                "Battle Time at this Position: %.2f seconds\n",
+                firingTime);
+    }
+
+    fclose(file);
+
+    printf("Part 2-A path results saved to part2a_path_results.txt\n");
+}
+
+void simulatePart2AC(
+    BattleShip *B,
+    EscortShip escorts[],
+    int n,
+    float firingDelay
+)
+{
+    printf("\n===== PART 2-A / PART 1-C SIMULATION =====\n");
+
+    FILE *file = fopen("part2a_part1c_results.txt", "w");
+
+    if (file == NULL)
+    {
+        printf("Error opening Part 2-A Part 1-C output file.\n");
+        return;
+    }
+
+    float cumulativeImpact = 0.0;
+    int battleshipDestroyed = 0;
+
+    /* Escort ships attack Battleship */
+    for (int i = 0; i < n; i++)
+    {
+        if (escorts[i].destroyed)
+        {
+            continue;
+        }
+
+        if (canEscortHitBattleship(escorts[i], *B))
+        {
+            cumulativeImpact += escorts[i].impactPower;
+
+            printf("Escort Ship %d hit Battleship - Impact: %.2f\n",
+                   escorts[i].index,
+                   escorts[i].impactPower);
+
+            fprintf(file,
+                    "Escort Ship %d hit Battleship - Impact: %.2f\n",
+                    escorts[i].index,
+                    escorts[i].impactPower);
+
+            if (cumulativeImpact >= 1.0)
+            {
+                battleshipDestroyed = 1;
+                break;
+            }
+        }
+    }
+
+    fprintf(file,
+            "Cumulative Impact on Battleship: %.2f\n",
+            cumulativeImpact);
+
+    printf("Cumulative Impact on Battleship: %.2f\n",
+           cumulativeImpact);
+
+    if (battleshipDestroyed)
+    {
+        printf("BATTLESHIP DESTROYED!\n");
+        fprintf(file, "Battleship Destroyed: YES\n");
+
+        fclose(file);
+        return;
+    }
+
+    printf("Battleship survived escort attacks.\n");
+    fprintf(file, "Battleship Destroyed: NO\n");
+
+    /*
+     * Create attack order for escort ships
+     * currently inside Battleship range.
+     */
+    int order[n];
+    int count = 0;
+
+    for (int i = 0; i < n; i++)
+    {
+        if (!escorts[i].destroyed &&
+            canBattleshipHit(*B, escorts[i]))
+        {
+            order[count] = i;
+            count++;
+        }
+    }
+
+    /*
+     * Attack higher impact-power escort ships first.
+     */
+    for (int i = 0; i < count - 1; i++)
+    {
+        for (int j = i + 1; j < count; j++)
+        {
+            if (escorts[order[j]].impactPower >
+                escorts[order[i]].impactPower)
+            {
+                int temp = order[i];
+                order[i] = order[j];
+                order[j] = temp;
+            }
+        }
+    }
+
+    printf("\nBattleship Attack Order:\n");
+    fprintf(file, "\nBattleship Attack Order:\n");
+
+    float firingTime = 0.0;
+
+    for (int i = 0; i < count; i++)
+    {
+        int e = order[i];
+
+        printf("%d. Escort Ship %d - Time: %.2f seconds\n",
+               i + 1,
+               escorts[e].index,
+               firingTime);
+
+        fprintf(file,
+                "%d. Escort Ship %d - Time: %.2f seconds\n",
+                i + 1,
+                escorts[e].index,
+                firingTime);
+
+        /* Battleship destroys escort with one attack */
+        escorts[e].destroyed = 1;
+
+        if (i < count - 1)
+        {
+            firingTime += firingDelay;
+        }
+    }
+
+    printf("Total Escort Ships Destroyed: %d\n", count);
+    printf("Total Battle Time: %.2f seconds\n", firingTime);
+
+    fprintf(file,
+            "\nTotal Escort Ships Destroyed: %d\n",
+            count);
+
+    fprintf(file,
+            "Battleship Firing Delay: %.2f seconds\n",
+            firingDelay);
+
+    fprintf(file,
+            "Total Battle Time: %.2f seconds\n",
+            firingTime);
+
+    fclose(file);
+
+    printf("Results saved to part2a_part1c_results.txt\n");
+}

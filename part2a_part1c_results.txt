@@ -1,0 +1,19 @@
+Escort Ship 3 hit Battleship - Impact: 0.04
+Escort Ship 8 hit Battleship - Impact: 0.08
+Escort Ship 9 hit Battleship - Impact: 0.08
+Cumulative Impact on Battleship: 0.20
+Battleship Destroyed: NO
+
+Battleship Attack Order:
+1. Escort Ship 8 - Time: 0.00 seconds
+2. Escort Ship 6 - Time: 2.00 seconds
+3. Escort Ship 4 - Time: 4.00 seconds
+4. Escort Ship 1 - Time: 6.00 seconds
+5. Escort Ship 2 - Time: 8.00 seconds
+6. Escort Ship 7 - Time: 10.00 seconds
+7. Escort Ship 3 - Time: 12.00 seconds
+8. Escort Ship 10 - Time: 14.00 seconds
+
+Total Escort Ships Destroyed: 8
+Battleship Firing Delay: 2.00 seconds
+Total Battle Time: 14.00 seconds

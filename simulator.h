@@ -136,4 +136,27 @@ void simulatePart1CPath(
     int k
 );
 
+void simulatePart2A(
+    BattleShip *B,
+    EscortShip escorts[],
+    int n,
+    float firingDelay
+);
+
+void simulatePart2APath(
+    BattleShip *B,
+    EscortShip escorts[],
+    int n,
+    int d,
+    int k,
+    float firingDelay
+);
+
+void simulatePart2AC(
+    BattleShip *B,
+    EscortShip escorts[],
+    int n,
+    float firingDelay
+);
+
 #endif

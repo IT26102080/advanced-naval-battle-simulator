@@ -1,0 +1,35 @@
+
+Position 1 - Battleship Position: (82, 30)
+Attack Order:
+1. Escort Ship 8 - Time 0.00 s
+2. Escort Ship 9 - Time 2.00 s
+3. Escort Ship 6 - Time 4.00 s
+4. Escort Ship 1 - Time 6.00 s
+5. Escort Ship 2 - Time 8.00 s
+6. Escort Ship 4 - Time 10.00 s
+7. Escort Ship 5 - Time 12.00 s
+8. Escort Ship 3 - Time 14.00 s
+9. Escort Ship 7 - Time 16.00 s
+10. Escort Ship 10 - Time 18.00 s
+Escort Ships Destroyed at this Position: 10
+Battle Time at this Position: 18.00 seconds
+
+Position 2 - Battleship Position: (68, 38)
+Attack Order:
+Escort Ships Destroyed at this Position: 0
+Battle Time at this Position: 0.00 seconds
+
+Position 3 - Battleship Position: (90, 0)
+Attack Order:
+Escort Ships Destroyed at this Position: 0
+Battle Time at this Position: 0.00 seconds
+
+Position 4 - Battleship Position: (21, 62)
+Attack Order:
+Escort Ships Destroyed at this Position: 0
+Battle Time at this Position: 0.00 seconds
+
+Position 5 - Battleship Position: (72, 73)
+Attack Order:
+Escort Ships Destroyed at this Position: 0
+Battle Time at this Position: 0.00 seconds
