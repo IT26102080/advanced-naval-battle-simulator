@@ -96,4 +96,6 @@ void simulatePart1A(
 
 float calculateTimeToHit(float distance, float velocity, float angle);
 
+void generateBattleShipPosition(BattleShip *B, int d);
+
 #endif

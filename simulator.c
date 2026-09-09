@@ -567,3 +567,11 @@ float calculateTimeToHit(float distance, float velocity, float angle)
 
     return distance / horizontalVelocity;
 }
+
+
+
+void generateBattleShipPosition(BattleShip *B, int d)
+{
+    B->x = generateRandomCoordinate(d);
+    B->y = generateRandomCoordinate(d);
+}
