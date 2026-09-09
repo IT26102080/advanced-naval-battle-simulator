@@ -1,0 +1,38 @@
+
+Position 1 - Battleship Position: (52, 10)
+Escort Ship 2 hit Battleship - Impact: 0.05
+Escort Ship 5 hit Battleship - Impact: 0.08
+Escort Ship 6 hit Battleship - Impact: 0.06
+Escort Ship 7 hit Battleship - Impact: 0.08
+Escort Ship 8 hit Battleship - Impact: 0.08
+Escort Ship 9 hit Battleship - Impact: 0.06
+Cumulative Impact: 0.41
+Escort Ship 1 DESTROYED
+Escort Ship 2 DESTROYED
+Escort Ship 3 DESTROYED
+Escort Ship 4 DESTROYED
+Escort Ship 5 DESTROYED
+Escort Ship 6 DESTROYED
+Escort Ship 7 DESTROYED
+Escort Ship 8 DESTROYED
+Escort Ship 9 DESTROYED
+Escort Ship 10 DESTROYED
+Battleship Destroyed: NO
+
+Position 2 - Battleship Position: (40, 50)
+Cumulative Impact: 0.41
+Battleship Destroyed: NO
+
+Position 3 - Battleship Position: (55, 84)
+Cumulative Impact: 0.41
+Battleship Destroyed: NO
+
+Position 4 - Battleship Position: (57, 15)
+Cumulative Impact: 0.41
+Battleship Destroyed: NO
+
+Position 5 - Battleship Position: (65, 41)
+Cumulative Impact: 0.41
+Battleship Destroyed: NO
+
+Final Cumulative Impact: 0.41

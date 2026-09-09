@@ -1,0 +1,2 @@
+Position 1 - Battleship Position: (100, 38)
+Gun Status: NORMAL

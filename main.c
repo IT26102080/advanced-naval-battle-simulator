@@ -9,10 +9,16 @@ int main(void)
     int d;
     int n;
     int k;
+    int t;
+    float thetaMin;
+
 
     BattleShip battleship;
 
     EscortShip escorts[MAX_ESCORTS];
+    EscortShip escortsPart1C[MAX_ESCORTS];
+    EscortShip escortsSimulation2[MAX_ESCORTS];
+
 
     srand(time(NULL));
 
@@ -28,6 +34,25 @@ int main(void)
 
     printf("Enter number of battleship path positions: ");
     scanf("%d", &k);
+
+printf("Enter iteration when battleship gun gets jammed: ");
+scanf("%d", &t);
+
+printf("Enter minimum vertical angle after gun jam: ");
+scanf("%f", &thetaMin);
+
+if (t <= 0 || t >= k)
+{
+    printf("Invalid jam iteration. t must be between 1 and k-1.\n");
+    return 1;
+}
+
+if (thetaMin <= 0 || thetaMin >= 30)
+{
+    printf("Invalid minimum angle. Angle must be between 0 and 30 degrees.\n");
+    return 1;
+}
+
 
     if (n > MAX_ESCORTS)
     {
@@ -66,9 +91,48 @@ simulatePart1A(
     n
 );
 
+for (int i = 0; i < n; i++)
+{
+    escortsSimulation2[i] = escorts[i];
+}
+
 simulatePart1B(
     &battleship,
     escorts,
+    n,
+    d,
+    k
+);
+
+simulatePart1B2(
+    &battleship,
+    escortsSimulation2,
+    n,
+    d,
+    k,
+    t,
+    thetaMin
+);
+
+for (int i = 0; i < n; i++)
+{
+    escortsPart1C[i] = escortsSimulation2[i];
+}
+
+simulatePart1C(
+    &battleship,
+    escortsPart1C,
+    n
+);
+
+for (int i = 0; i < n; i++)
+{
+    escortsPart1C[i] = escortsSimulation2[i];
+}
+
+simulatePart1CPath(
+    &battleship,
+    escortsPart1C,
     n,
     d,
     k

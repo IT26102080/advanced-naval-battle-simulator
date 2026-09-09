@@ -421,7 +421,7 @@ void saveFinalConditions(
 }
 
 
-void simulatePart1A(
+int simulatePart1A(
     BattleShip *B,
     EscortShip escorts[],
     int n
@@ -437,7 +437,7 @@ void simulatePart1A(
     if (hitFile == NULL)
     {
         printf("Error creating hit details file.\n");
-        return;
+        return battleshipDestroyed;;
     }
 
     printf("\n=====================================\n");
@@ -554,6 +554,7 @@ if (hitTime > battleTime)
     );
 
     printf("\nSimulation results saved successfully.\n");
+return battleshipDestroyed;
 }
 
 
@@ -623,7 +624,14 @@ fprintf(part1BFile,
         "Position %d - Battleship Position: (%d, %d)\n",
         i + 1, B->x, B->y);
 
-        simulatePart1A(B, escorts, n);
+if (simulatePart1A(B, escorts, n))
+{
+    fprintf(part1BFile,
+            "Battleship destroyed at Position %d\n",
+            i + 1);
+
+    break;
+}
 
 int destroyedCount = 0;
 
@@ -642,4 +650,368 @@ fprintf(part1BFile,
 
 }
 fclose(part1BFile);
+}
+
+
+
+void simulatePart1B2(
+    BattleShip *B,
+    EscortShip escorts[],
+    int n,
+    int d,
+    int k,
+    int t,
+    float thetaMin
+)
+{
+    printf("\n===== PART 1-B SIMULATION 2 =====\n");
+
+FILE *part1B2File = fopen("part1b_simulation2.txt", "w");
+
+if (part1B2File == NULL)
+{
+    printf("Error opening Part 1-B Simulation 2 output file.\n");
+    return;
+
+fclose(part1B2File);
+
+printf("\nPart 1-B Simulation 2 results saved.\n");
+}
+
+
+
+    printf("Gun will jam after iteration %d\n", t);
+    printf("Minimum angle after jam: %.2f degrees\n", thetaMin);
+
+for (int i = 0; i < k; i++)
+{
+    printf("\n--- Simulation 2 Position %d ---\n", i + 1);
+
+    generateBattleShipPosition(B, d);
+
+fprintf(part1B2File,
+        "Position %d - Battleship Position: (%d, %d)\n",
+        i + 1, B->x, B->y);
+
+if ((i + 1) <= t)
+{
+    fprintf(part1B2File,
+            "Gun Status: NORMAL\n");
+}
+else
+{
+    fprintf(part1B2File,
+            "Gun Status: JAMMED (Angle %.2f - 90.00)\n",
+            thetaMin);
+}
+
+    printf("Battleship Position: (%d, %d)\n",
+           B->x, B->y);
+
+if ((i + 1) <= t)
+{
+    printf("Battleship gun status: NORMAL\n");
+
+    if (simulatePart1A(B, escorts, n))
+    {
+        break;
+    }
+}
+else
+{
+    printf("Battleship gun status: JAMMED\n");
+    printf("Allowed vertical angle range: %.2f - 90.00 degrees\n",
+           thetaMin);
+
+    int battleshipDestroyed = 0;
+
+    for (int j = 0; j < n; j++)
+    {
+        if (escorts[j].destroyed)
+        {
+            continue;
+        }
+
+        if (canEscortHitBattleship(escorts[j], *B))
+        {
+            printf("Battleship destroyed by Escort Ship %d\n",
+                   escorts[j].index);
+
+            battleshipDestroyed = 1;
+            break;
+        }
+    }
+
+    if (battleshipDestroyed)
+    {
+        break;
+    }
+
+    for (int j = 0; j < n; j++)
+    {
+        if (escorts[j].destroyed)
+        {
+            continue;
+        }
+
+        if (canBattleshipHitAfterJam(
+                *B,
+                escorts[j],
+                thetaMin))
+        {
+            escorts[j].destroyed = 1;
+
+            printf("Escort Ship %d DESTROYED\n",
+                   escorts[j].index);
+        }
+    }
+}
+}
+
+
+}
+
+
+int canBattleshipHitAfterJam(
+    BattleShip B,
+    EscortShip E,
+    float thetaMin
+)
+{
+    float dx = E.x - B.x;
+    float dy = E.y - B.y;
+
+    float distance = sqrt(dx * dx + dy * dy);
+
+    for (float angle = thetaMin; angle <= 90.0; angle += 1.0)
+    {
+        float range = calculateProjectileRange(
+            B.maxVelocity,
+            angle
+        );
+
+        if (distance <= range)
+        {
+            return 1;
+        }
+    }
+
+    return 0;
+}
+
+
+void simulatePart1C(
+    BattleShip *B,
+    EscortShip escorts[],
+    int n
+)
+{
+    printf("\n===== PART 1-C SIMULATION =====\n");
+
+    FILE *file = fopen("part1c_results.txt", "w");
+
+    if (file == NULL)
+    {
+        printf("Error opening Part 1-C output file.\n");
+        return;
+    }
+
+    float cumulativeImpact = 0.0;
+    int battleshipDestroyed = 0;
+
+    /* Escort ships attack Battleship */
+    for (int i = 0; i < n; i++)
+    {
+        if (escorts[i].destroyed)
+        {
+            continue;
+        }
+
+        if (canEscortHitBattleship(escorts[i], *B))
+        {
+            cumulativeImpact += escorts[i].impactPower;
+
+            printf("Escort Ship %d hit Battleship - Impact: %.2f\n",
+                   escorts[i].index,
+                   escorts[i].impactPower);
+
+            fprintf(file,
+                    "Escort Ship %d hit Battleship - Impact: %.2f\n",
+                    escorts[i].index,
+                    escorts[i].impactPower);
+
+            if (cumulativeImpact >= 1.0)
+            {
+                battleshipDestroyed = 1;
+                break;
+            }
+        }
+    }
+
+    if (battleshipDestroyed)
+    {
+        printf("BATTLESHIP DESTROYED!\n");
+        fprintf(file, "Battleship Destroyed: YES\n");
+    }
+    else
+    {
+        printf("Battleship survived.\n");
+        printf("Cumulative Impact on Battleship: %.2f\n",
+               cumulativeImpact);
+
+        fprintf(file, "Battleship Destroyed: NO\n");
+        fprintf(file,
+                "Cumulative Impact on Battleship: %.2f\n",
+                cumulativeImpact);
+
+        /* Battleship attacks remaining escort ships */
+        for (int i = 0; i < n; i++)
+        {
+            if (escorts[i].destroyed)
+            {
+                continue;
+            }
+
+            if (canBattleshipHit(*B, escorts[i]))
+            {
+                escorts[i].destroyed = 1;
+
+                printf("Escort Ship %d DESTROYED\n",
+                       escorts[i].index);
+
+                fprintf(file,
+                        "Escort Ship %d DESTROYED\n",
+                        escorts[i].index);
+            }
+        }
+    }
+
+    fclose(file);
+
+    printf("Part 1-C results saved to part1c_results.txt\n");
+}
+
+void simulatePart1CPath(
+    BattleShip *B,
+    EscortShip escorts[],
+    int n,
+    int d,
+    int k
+)
+{
+    printf("\n===== PART 1-C PATH SIMULATION =====\n");
+
+    FILE *file = fopen("part1c_path_results.txt", "w");
+
+    if (file == NULL)
+    {
+        printf("Error opening Part 1-C path output file.\n");
+        return;
+    }
+
+    float cumulativeImpact = 0.0;
+    int fired[n];
+
+    /* Initially no escort ship has fired */
+    for (int i = 0; i < n; i++)
+    {
+        fired[i] = 0;
+    }
+
+    for (int p = 0; p < k; p++)
+    {
+        printf("\n--- Part 1-C Position %d ---\n", p + 1);
+
+        generateBattleShipPosition(B, d);
+
+        printf("Battleship Position: (%d, %d)\n",
+               B->x, B->y);
+
+        fprintf(file,
+                "\nPosition %d - Battleship Position: (%d, %d)\n",
+                p + 1, B->x, B->y);
+
+        /* Escort ships attack */
+        for (int i = 0; i < n; i++)
+        {
+            if (escorts[i].destroyed || fired[i])
+            {
+                continue;
+            }
+
+            if (canEscortHitBattleship(escorts[i], *B))
+            {
+                fired[i] = 1;
+
+                cumulativeImpact += escorts[i].impactPower;
+
+                printf("Escort Ship %d hit Battleship - Impact: %.2f\n",
+                       escorts[i].index,
+                       escorts[i].impactPower);
+
+                fprintf(file,
+                        "Escort Ship %d hit Battleship - Impact: %.2f\n",
+                        escorts[i].index,
+                        escorts[i].impactPower);
+            }
+        }
+
+        printf("Cumulative Impact: %.2f\n",
+               cumulativeImpact);
+
+        fprintf(file,
+                "Cumulative Impact: %.2f\n",
+                cumulativeImpact);
+
+        /* Battleship destroyed */
+        if (cumulativeImpact >= 1.0)
+        {
+            printf("BATTLESHIP DESTROYED at Position %d!\n",
+                   p + 1);
+
+            fprintf(file,
+                    "Battleship Destroyed: YES\n");
+
+            break;
+        }
+
+        /* Battleship attacks escort ships */
+        for (int i = 0; i < n; i++)
+        {
+            if (escorts[i].destroyed)
+            {
+                continue;
+            }
+
+            if (canBattleshipHit(*B, escorts[i]))
+            {
+                escorts[i].destroyed = 1;
+
+                printf("Escort Ship %d DESTROYED\n",
+                       escorts[i].index);
+
+                fprintf(file,
+                        "Escort Ship %d DESTROYED\n",
+                        escorts[i].index);
+            }
+        }
+
+        fprintf(file,
+                "Battleship Destroyed: NO\n");
+    }
+
+    if (cumulativeImpact < 1.0)
+    {
+        printf("\nBattleship survived Part 1-C path simulation.\n");
+        printf("Final Cumulative Impact: %.2f\n",
+               cumulativeImpact);
+
+        fprintf(file,
+                "\nFinal Cumulative Impact: %.2f\n",
+                cumulativeImpact);
+    }
+
+    fclose(file);
+
+    printf("Part 1-C path results saved to part1c_path_results.txt\n");
 }

@@ -87,7 +87,7 @@ void saveFinalConditions(
     int battleshipDestroyed
 );
 
-void simulatePart1A(
+int simulatePart1A(
     BattleShip *B,
     EscortShip escorts[],
     int n
@@ -99,6 +99,36 @@ float calculateTimeToHit(float distance, float velocity, float angle);
 void generateBattleShipPosition(BattleShip *B, int d);
 
 void simulatePart1B(
+    BattleShip *B,
+    EscortShip escorts[],
+    int n,
+    int d,
+    int k
+);
+
+void simulatePart1B2(
+    BattleShip *B,
+    EscortShip escorts[],
+    int n,
+    int d,
+    int k,
+    int t,
+    float thetaMin
+);
+
+int canBattleshipHitAfterJam(
+    BattleShip B,
+    EscortShip E,
+    float thetaMin
+);
+
+void simulatePart1C(
+    BattleShip *B,
+    EscortShip escorts[],
+    int n
+);
+
+void simulatePart1CPath(
     BattleShip *B,
     EscortShip escorts[],
     int n,
